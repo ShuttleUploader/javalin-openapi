@@ -43,8 +43,7 @@ open class OpenApiPlugin(userConfig: Consumer<OpenApiPluginConfiguration>) : Plu
         val docsNode = jsonMapper.readTree(content) as ObjectNode
 
         //process OpenAPI "info"
-        val currentInfo = jsonMapper.readerForUpdating(docsNode.get("info"))
-        docsNode.replace("info", currentInfo.readValue(jsonMapper.convertValue(info, JsonNode::class.java)))
+        docsNode.replace("info", jsonMapper.convertValue(info, JsonNode::class.java))
 
         // process OpenAPI "servers"
         docsNode.replace("servers", jsonMapper.convertValue(servers, JsonNode::class.java))

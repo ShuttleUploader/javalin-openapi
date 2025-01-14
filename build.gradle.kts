@@ -2,10 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "2.1.0"
     `maven-publish`
     signing
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
 description = "Javalin OpenAPI Parent | Parent"
@@ -131,14 +130,6 @@ subprojects {
     }
 }
 
-nexusPublishing {
-    repositories {
-        sonatype {
-            username.set(getEnvOrProperty("SONATYPE_USER", "sonatypeUser"))
-            password.set(getEnvOrProperty("SONATYPE_PASSWORD", "sonatypePassword"))
-        }
-    }
-}
 
 fun getEnvOrProperty(env: String, property: String): String? =
     System.getenv(env) ?: findProperty(property)?.toString()
